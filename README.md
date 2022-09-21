@@ -1,2 +1,2 @@
 # julia-exercism
-My solutions to the Hulia Exercism track exercises
+My solutions to the Julia Exercism track exercises

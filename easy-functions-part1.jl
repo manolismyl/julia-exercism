@@ -21,22 +21,18 @@ Invalid strands raise a `DomainError`.
 
 """
 function count_nucleotides(strand)
-    dictionary = Dict{Char, Int}('A' => 0, 'C' => 0, 'G' => 0, 'T' => 0)
-    for nucleotide in strand
-        if nucleotide =='A'
-            dictionary['A'] += 1
-        elseif nucleotide =='C'
-            dictionary['C'] += 1
-        elseif nucleotide =='G'
-            dictionary['G'] += 1
-        elseif nucleotide =='T'
-            dictionary['T'] += 1
-        else
-            throw(DomainError(nucleotide))
-        end    
+    utf8 = transcode(UInt8, strand)
+    counts = zeros(Int, 256)
+    @inbounds for byte in utf8
+        counts[byte+1] += 1
     end
-    return dictionary
+    result = Dict(base => counts[Int(base)+1] for base in "ACGT")
+    if sum(values(result)) != length(utf8)
+        throw(DomainError(strand, "only A, C, G and T are valid nucleotides"))
+    end
+    return result
 end
+
 
 """
     ispangram(input)

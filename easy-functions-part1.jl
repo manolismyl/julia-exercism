@@ -65,3 +65,10 @@ function ispangram(input)
     end
 end
 
+"""
+Rotational cipher
+"""
+
+function rotational_cipher()
+    
+end

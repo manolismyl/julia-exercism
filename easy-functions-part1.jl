@@ -48,6 +48,13 @@ end
 Rotational cipher
 """
 
-function rotational_cipher()
-    
+function rotate(key, input)
+    key = mod(key,26)
+    alphabet = 'a':'z'
+    output{String} = []
+    for i in lowercase(input)
+        push!(output, String(alphabet[findfirst(item -> item == i, alphabet) + key]))
+    end
+    println(output)
+    return output
 end

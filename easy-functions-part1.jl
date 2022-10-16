@@ -46,15 +46,14 @@ end
 
 """
 Rotational cipher
+Shamelessly stolen by xlxs4
+https://github.com/xlxs4/julia-exercism/blob/main/rotational-cipher.jl
 """
 
-function rotate(key, input)
-    key = mod(key,26)
-    alphabet = 'a':'z'
-    output{String} = []
-    for i in lowercase(input)
-        push!(output, String(alphabet[findfirst(item -> item == i, alphabet) + key]))
-    end
-    println(output)
-    return output
+function rotate(key, input::AbstractChar)
+    a = isuppercase(input) ? 'A' : 'a'
+    return isletter(input) ? ((input - a + key) % 26) + a : input
+end
+function rotate(key, input::AbstractString)
+    return map(x -> rotate(key, x), input)    
 end

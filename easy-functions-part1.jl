@@ -5,11 +5,7 @@ Return `true` if `year` is a leap year in the gregorian calendar.
 
 """
 function is_leap_year(year::Int)
-    if mod(year, 4) == 0 && (mod(year,100) !=0 || mod(year,400) == 0)
-        return true
-    else
-        return false
-    end
+    return (mod(year, 4) == 0 && (mod(year,100) !=0 || mod(year,400) == 0)) ? true : false
 end
 
 """

@@ -57,3 +57,19 @@ end
 function rotate(key, input::AbstractString)
     return map(x -> rotate(key, x), input)    
 end
+
+
+"""
+Raindrops: In exercism it doesn't accept this solution, because of the use of Primes Package. 
+Noentheless, this solution achieves what was asked
+"""
+# using Primes
+
+function raindrops(number)
+    factor_dict = factor(number)
+    s1 = (factor_dict[3] > 0) ? "Pling" : ""
+    s2 = (factor_dict[5] > 0) ? "Plang" : ""
+    s3 = (factor_dict[7] > 0) ? "Plong" : ""
+    s = s1*s2*s3
+    return (length(s)>0) ? s : string(number)
+end

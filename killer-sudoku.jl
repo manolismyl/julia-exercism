@@ -1,18 +1,23 @@
 function killer_sudoku_cheats(cage_length, number_goal, restrictions = NaN)
-    
-    if restrictions == NaN
-        return repeat_combinations(cage_length, number_goal, 0)
+    if cage_length == 1
+        return number_goal
     else
-        total_combinations = repeat_combinations(cage_length, number_goal, 0)
-        for i = 1:size(total_combinations,1)
-            for j in restrictions
-                if length(findall(x -> x == j, total_combinations[i,:])) != 0
-                    total_combinations = total_combinations[setdiff(1:end, i), :]
-                    break
+        if restrictions == NaN
+            return repeat_combinations(cage_length, number_goal, 0)
+        else
+            total_combinations = repeat_combinations(cage_length, number_goal, 0)
+            index = []
+            for i = 1:size(total_combinations,1)
+                for j in restrictions
+                    if length(findall(x -> x == j, total_combinations[i,:])) != 0
+                        push!(index, i)
+                        break
+                    end
                 end
             end
+
+            return total_combinations[setdiff(1:end, index), :]
         end
-        return total_combinations
     end
 end
 
